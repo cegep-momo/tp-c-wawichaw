@@ -12,10 +12,7 @@ Book:: Book(const std::string& title, const std:: string& author, const std::str
 
 }
 
-//destructeur
-Book::~Book() {
 
-}
 
 //Méthodes d'accès (getters)
 std::string Book ::getTitle() const {
