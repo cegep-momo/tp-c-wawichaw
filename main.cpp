@@ -87,10 +87,18 @@ int main() {
             case 2: { // Remove Book
                 string isbn = getInput("Entrez l'ISBN du livre à supprimer : ");
                 
-                if (library.removeBook(isbn)) {
+               Book* book = library.findBookByISBN(isbn);
+               if (!book){
+                    cout << "Erreur: Aucun livre trouvé.\n";
+                
+               }else{
+                    string confirmation = getInput("Voulez vous vraiment supprimer ce livre ? (o/n) : ");
+                    if (confirmation == "o" || confirmation == "O") {
+                    library .removeBook(isbn);
                     cout << "Livre supprimé avec succès !\n";
-                } else {
-                    cout << "Livre non trouvé.\n";
+               }else {
+                    cout << "Suppression annulée.\n";
+               }
                 }
                 pauseForInput();
                 break;
