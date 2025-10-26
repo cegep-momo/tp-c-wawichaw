@@ -85,6 +85,7 @@ int main() {
             }
             
             case 2: { // Remove Book
+                //ajout de la confirmation avant suppression
                 string isbn = getInput("Entrez l'ISBN du livre à supprimer : ");
                 
                Book* book = library.findBookByISBN(isbn);
