@@ -193,6 +193,30 @@ void Library::displayAllUsers() {
     }
 }
 
+//Fonction triage des livres par titre
+
+vector<Book*> Library::getBooksSortedByTitle() {
+
+    vector<Book*> sortedBooks = getAllBooks();
+    std::sort(sortedBooks.begin(), sortedBooks.end(),
+        [](Book* a, Book* b) {
+            return a->getTitle() < b->getTitle();
+        });
+    return sortedBooks;
+}
+
+//Fonction triage des livres par auteur
+
+vector<Book*> Library::getBooksSortedByAuthor() {
+    vector<Book*> sortedBooks = getAllBooks();
+    
+    std::sort(sortedBooks.begin(), sortedBooks.end(),
+        [](Book* a, Book* b) {
+            return a->getAuthor() < b->getAuthor();
+        });
+    return sortedBooks;
+}
+
 // Statistics
 int Library::getTotalBooks() const { return books.size(); }
 int Library::getAvailableBookCount() const {
