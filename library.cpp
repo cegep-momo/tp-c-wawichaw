@@ -193,29 +193,53 @@ void Library::displayAllUsers() {
     }
 }
 
-//Fonction triage des livres par titre
+// Trie les livres par titre
+void Library::sortBooksByTitle() {
+    
+    if (books.empty()) {
+        cout << "Aucun livre à trier par titre.\n";
+        return;
+    }
 
-vector<Book*> Library::getBooksSortedByTitle() {
-
-    vector<Book*> sortedBooks = getAllBooks();
-    std::sort(sortedBooks.begin(), sortedBooks.end(),
-        [](Book* a, Book* b) {
+    sort(books.begin(), books.end(),
+        [](const unique_ptr<Book>& a, const unique_ptr<Book>& b) {
             return a->getTitle() < b->getTitle();
         });
-    return sortedBooks;
+
+    cout << "\n=== LIVRES TRIÉS PAR TITRE ===\n"; 
+    for (size_t i = 0; i < books.size(); ++i) {
+        cout << i + 1 << ". \"" << books[i]->getTitle() << "\" par " 
+             << books[i]->getAuthor()
+             << " | ISBN: " << books[i]->getISBN()
+             << " | " << (books[i]->getAvailability() ? "Disponible" : "Emprunté")
+             << "\n";
+    }
 }
 
-//Fonction triage des livres par auteur
+// Trie les livres par auteur
+void Library::sortBooksByAuthor() {
+     if (books.empty()) {
+        cout << "Aucun livre à trier par auteur.\n";
+        return;
+    }
 
-vector<Book*> Library::getBooksSortedByAuthor() {
-    vector<Book*> sortedBooks = getAllBooks();
-    
-    std::sort(sortedBooks.begin(), sortedBooks.end(),
-        [](Book* a, Book* b) {
+    sort(books.begin(), books.end(),
+        [](const unique_ptr<Book>& a, const unique_ptr<Book>& b) {
             return a->getAuthor() < b->getAuthor();
         });
-    return sortedBooks;
+
+    cout << "\n=== LIVRES TRIÉS PAR AUTEUR ===\n"; 
+    for (size_t i = 0; i < books.size(); ++i) {
+        cout << i + 1 << ". \"" << books[i]->getTitle() << "\" par " 
+             << books[i]->getAuthor()
+             << " | ISBN: " << books[i]->getISBN()
+             << " | " << (books[i]->getAvailability() ? "Disponible" : "Emprunté")
+             << "\n";
 }
+    
+}
+
+
 
 // Statistics
 int Library::getTotalBooks() const { return books.size(); }
